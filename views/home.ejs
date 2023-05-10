@@ -1,12 +1,70 @@
 <!DOCTYPE html>
 <html>
-  
-<head>
-    <title>Page Title</title>
-</head>
-  
-<body>
-    <%= variableName %>
-</body>
-  
+	<head>
+		<title>Employee Management System</title>
+	</head>
+	<style>
+		table {
+			font-family: arial, sans-serif;
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		td,
+		th {
+			border: 1px solid #dddddd;
+			text-align: left;
+			padding: 8px;
+		}
+
+		tr:nth-child(even) {
+			background-color: #dddddd;
+		}
+	</style>
+
+	<body>
+		<h2>Employee Management System</h2>
+		<table>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Post</th>
+				<th>Salary</th>
+				<th>Delete</th>
+			</tr>
+			<% data.forEach(element => { %>
+			<tr>
+				<td><%= element.employeeId %></td>
+				<td><%= element.employeeName %></td>
+				<td><%= element.employeePost %></td>
+				<td><%= element.employeeSalary %></td>
+				<td>
+					<form action="/delete" method="post">
+						<input type="text" style="display: none" name="employeeId" value="<%= element.employeeId %>" />
+						<button type="submit">Delete</button>
+					</form>
+				</td>
+			</tr>
+			<% }) %>
+		</table>
+
+		<h2>Add Employee</h2>
+
+		<form action="/" method="post">
+			<input type="text" placeholder="Employee Name" name="employeeName" />
+			<input type="text" placeholder="Employee Post" name="employeePost" />
+			<input type="text" placeholder="Employee Salary" name="employeeSalary" />
+			<button type="submit">Submit</button>
+		</form>
+
+		<h2>Update Employee</h2>
+
+		<form action="/update" method="post">
+			<input type="text" placeholder="Employee Id" name="employeeId" />
+			<input type="text" placeholder="Employee Name" name="employeeName" />
+			<input type="text" placeholder="Employee Post" name="employeePost" />
+			<input type="text" placeholder="Employee Salary" name="employeeSalary" />
+			<button type="submit">Update</button>
+		</form>
+	</body>
 </html>
